@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopee ISV Integration Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">OrderByte</h1>
+      <nav class="hidden md:flex space-x-6 font-medium">
+        <a href="home.html" class="hover:text-blue-600">Home</a>
+        <a href="products.html" class="hover:text-blue-600">Products</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+        <a href="orders.html" class="hover:text-blue-600">Order</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="#cart" class="relative">🛒<span class="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-1">2</span></a>
+        <a href="login.html" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="min-h-screen px-6 py-10">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl font-bold text-orange-600 mb-8 text-center">Shopee ISV Integration Demo</h1>
+
+      <!-- Shopee Connect -->
+      <div class="text-center mb-10">
+        <button
+          id="connectBtn"
+          class="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600 transition"
+        >
+          Connect Shopee Shop
+        </button>
+        <p id="connectStatus" class="text-green-600 mt-2 hidden">Shop connected successfully!</p>
+      </div>
+
+      <!-- Product Section -->
+      <div class="mb-12">
+        <h2 class="text-xl font-semibold mb-2">Synced Products</h2>
+        <button
+          id="fetchProductsBtn"
+          class="bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600 transition mb-4"
+        >
+          Fetch Products
+        </button>
+        <pre id="productOutput" class="bg-gray-100 p-4 rounded text-sm overflow-x-auto text-gray-700">No products fetched yet.</pre>
+      </div>
+
+      <!-- Orders Section -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Recent Orders</h2>
+        <button
+          id="fetchOrdersBtn"
+          class="bg-green-500 text-white px-5 py-2 rounded hover:bg-green-600 transition mb-4"
+        >
+          Fetch Orders
+        </button>
+        <div id="orderTableWrapper">
+          <p class="text-gray-500 mt-2">No orders fetched yet.</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-500 mt-10 text-center">
+        This page is a mock demo for Shopee OpenAPI integration testing.
+      </p>
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script>
+    let connected = false;
+    let products = [];
+    let orders = [];
+
+    document.getElementById("connectBtn").addEventListener("click", () => {
+      connected = true;
+      alert("Shopee OAuth simulated.\nAccess Token: mock_access_token_123456");
+      document.getElementById("connectStatus").classList.remove("hidden");
+    });
+
+    document.getElementById("fetchProductsBtn").addEventListener("click", () => {
+      products = [
+        { id: 1, name: "Wireless Mouse", stock: 100 },
+        { id: 2, name: "Bluetooth Headphones", stock: 45 },
+        { id: 3, name: "Gaming Keyboard", stock: 30 },
+      ];
+      document.getElementById("productOutput").textContent = JSON.stringify(products, null, 2);
+    });
+
+    document.getElementById("fetchOrdersBtn").addEventListener("click", () => {
+      orders = [
+        { orderId: "20250601A1", buyer: "John Doe", total: 899.0, status: "Processed" },
+        { orderId: "20250602B2", buyer: "Jane Smith", total: 1499.0, status: "Shipped" },
+        { orderId: "20250603C3", buyer: "Carlos Tan", total: 320.5, status: "Pending" },
+      ];
+
+      const wrapper = document.getElementById("orderTableWrapper");
+      if (orders.length === 0) {
+        wrapper.innerHTML = `<p class="text-gray-500 mt-2">No orders fetched yet.</p>`;
+        return;
+      }
+
+      let table = `
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border border-gray-300">
+            <thead class="bg-green-100">
+              <tr>
+                <th class="border p-2 text-left">Order ID</th>
+                <th class="border p-2 text-left">Buyer</th>
+                <th class="border p-2 text-right">Total (₱)</th>
+                <th class="border p-2 text-center">Status</th>
+                <th class="border p-2 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+
+      orders.forEach(order => {
+        table += `
+          <tr class="hover:bg-gray-50">
+            <td class="border p-2">${order.orderId}</td>
+            <td class="border p-2">${order.buyer}</td>
+            <td class="border p-2 text-right">${order.total.toFixed(2)}</td>
+            <td class="border p-2 text-center">${order.status}</td>
+            <td class="border p-2 text-center">
+            <button onclick="printOrder('${order.orderId}', '${order.buyer}', ${order.total}, '${order.status}')" 
+                    class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800">
+              Print
+            </button>
+          </td>
+          </tr>
+        `;
+      });
+
+      table += `</tbody></table></div>`;
+      wrapper.innerHTML = table;
+    });
+  </script>
+
+  <script src="assets/js/print.js"></script>
+
+
+</body>
+</html>

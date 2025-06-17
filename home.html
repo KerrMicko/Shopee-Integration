@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrderByte Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <style>
+    /* You can also include your Tailwind-generated globals.css here if needed */
+  </style>
+</head>
+<body class="font-sans text-gray-800">
+
+   <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">OrderByte</h1>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6 font-medium">
+        <a href="home.html" class="hover:text-blue-600">Home</a>
+        <a href="products.html" class="hover:text-blue-600">Products</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+        <a href="orders.html" class="hover:text-blue-600">Order</a>
+      </nav>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="md:hidden flex items-center">
+        <button id="menu-toggle" class="text-blue-600 text-2xl">☰</button>
+      </div>
+
+      <!-- Cart and Login -->
+      <div class="flex items-center gap-4">
+        <a href="#cart" class="relative">
+          🛒
+          <span class="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-1">2</span>
+        </a>
+        <a href="index.html" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">
+          Login
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full bg-white shadow-lg">
+      <nav class="flex flex-col items-center space-y-4 py-4 font-medium">
+        <a href="/" class="hover:text-blue-600">Home</a>
+        <a href="/menu" class="hover:text-blue-600">Products</a>
+        <a href="/contact" class="hover:text-blue-600">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section relative w-full h-screen overflow-hidden flex items-center justify-center bg-black">
+    <div class="hero-section-overlay absolute top-0 left-0 w-full h-full bg-black/40 z-10"></div>
+    <video id="hero-video" class="hero-video absolute top-1/2 left-1/2 w-full h-full object-cover transform -translate-x-1/2 -translate-y-1/2 z-0" autoplay loop muted playsinline>
+      <source src="https://res.cloudinary.com/dkpxdp4hy/video/upload/v1744353210/HeroVideo_on5paq.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-section-content relative z-20 text-center text-white p-6">
+      <h2 class="text-4xl font-bold mb-4 leading-tight">Unlock the Future of Computing with OrderByte</h2>
+      <p class="text-lg mb-6">Your one-stop solution for powerful computers and tech products. Fast shipping, top-tier quality, and the latest tech trends—all in one place.</p>
+      <a href="products.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-xl hover:bg-blue-700 transition duration-300 shadow-lg transform hover:scale-105">
+        Shop Now
+      </a>
+    </div>
+  </section>
+
+  <!-- Popular Categories Section -->
+  <section id="categories" class="relative py-16 bg-gradient-to-r from-blue-50 to-white h-screen">
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://via.placeholder.com/1920x1080?text=Hero+BG');"></div>
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+      <h3 class="text-4xl font-bold text-center text-black mb-6">Popular Categories</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Category Card 1 -->
+        <div class="border-2 border-blue-200 rounded-xl p-6 hover:shadow-2xl hover:bg-blue-50 transition duration-300 transform hover:scale-105">
+          <div class="h-40 bg-gray-200 rounded-lg overflow-hidden mb-4">
+            <img src="https://via.placeholder.com/400x200?text=Category+1" alt="Category 1" class="w-full h-full object-cover transition duration-300" />
+          </div>
+          <h4 class="text-2xl font-semibold mb-2 text-gray-800">Category 1</h4>
+          <p class="text-gray-600 mb-4">Explore a variety of products and services under this category.</p>
+          <button class="bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition">Explore Now</button>
+        </div>
+        <!-- Category Card 2 -->
+        <div class="border-2 border-blue-200 rounded-xl p-6 hover:shadow-2xl hover:bg-blue-50 transition duration-300 transform hover:scale-105">
+          <div class="h-40 bg-gray-200 rounded-lg overflow-hidden mb-4">
+            <img src="https://via.placeholder.com/400x200?text=Category+2" alt="Category 2" class="w-full h-full object-cover transition duration-300" />
+          </div>
+          <h4 class="text-2xl font-semibold mb-2 text-gray-800">Category 2</h4>
+          <p class="text-gray-600 mb-4">Explore a variety of products and services under this category.</p>
+          <button class="bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition">Explore Now</button>
+        </div>
+        <!-- Category Card 3 -->
+        <div class="border-2 border-blue-200 rounded-xl p-6 hover:shadow-2xl hover:bg-blue-50 transition duration-300 transform hover:scale-105">
+          <div class="h-40 bg-gray-200 rounded-lg overflow-hidden mb-4">
+            <img src="https://via.placeholder.com/400x200?text=Category+3" alt="Category 3" class="w-full h-full object-cover transition duration-300" />
+          </div>
+          <h4 class="text-2xl font-semibold mb-2 text-gray-800">Category 3</h4>
+          <p class="text-gray-600 mb-4">Explore a variety of products and services under this category.</p>
+          <button class="bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition">Explore Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    let isOpen = false;
+
+    menuToggle.addEventListener('click', () => {
+      isOpen = !isOpen;
+      mobileMenu.classList.toggle('hidden', !isOpen);
+      menuToggle.textContent = isOpen ? '✖️' : '☰';
+    });
+  </script>
+
+</body>
+</html>
